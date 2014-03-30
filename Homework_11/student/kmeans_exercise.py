@@ -20,6 +20,12 @@ def distance_function(v1, v2):
     pass
     #TODO: IMPLEMENT
     # Write a function to compute the euclidean distance between two vectors, v1 and v2
+    # total = 0
+    # for x, y in zip(v1, v2):
+    #     total += (x - y)**2
+
+    # return np.sqrt(total)
+    return np.sqrt ( np.sum ( (v1 - v2) ** 2 ) )
 
 def k_means(X, n_clusters,
             n_init=10, max_iter=10):
@@ -64,6 +70,10 @@ def k_means(X, n_clusters,
         labels, score, centers = _kmeans_single(X, n_clusters, max_iter=max_iter)
         # determine if these results are the best so far
         #TODO: IMPLEMENT
+        if score < best_score:
+            best_centers = centers
+            best_labels = labels 
+            best_score = score
 
     return best_centers, best_labels, best_score
 
@@ -110,6 +120,10 @@ def _kmeans_single(X, n_clusters, max_iter=10):
         #TODO: IMPLEMENT
         # Is this run better than the last run?
             # If so, update best_centers, best_labels, best_score
+        if score < best_score:
+            best_centers = centers
+            best_labels = labels 
+            best_score = score
 
     return best_labels, best_score, best_centers
 
@@ -144,8 +158,24 @@ def _compute_labels_and_score(X, centers):
     score = 0.0
     #TODO: IMPLEMENT
         # Iterate over the samples and the clusters
-        # Compute the distance between samples and cluster center
-        # Save the closest cluster center
+    for i in xrange(n_samples):
+        closest_center = None
+        min_dist = np.infty # 999999999
+
+        for j in xrange(n_clusters):
+            sample = X[i]
+            center = centers[j]
+            # Compute the distance between samples and cluster center
+            d = distance_function(sample, center)
+            if d < min_dist:
+                min_dist = d
+                closest_center = j
+        labels[i] = closest_center
+        score += min_dist
+
+                # Save the closest cluster center
+
+
         # SCORE is the SUM of distances from point to closest center
         # So once we've found the closest center, add the distance to closest center to score
 
@@ -185,6 +215,9 @@ def _recompute_centers( X, labels, n_clusters):
     # For each label, average over samples and features
     #TODO: IMPLEMENT
         # For each sample
+    for i in xrange(n_samples):
+        label = labels[i] 
+        centers[label] += X[i]
             # What label is it? Let's say its label is 'label'
             # Add feature X's feature i to centers[label] feature value i
 
