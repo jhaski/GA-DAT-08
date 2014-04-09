@@ -24,4 +24,7 @@ GA-DAT-08
 
 * [Lesson 10: Ensemble Methods](https://github.com/jhaski/GA-DAT-08/wiki/Lesson-10:-Ensemble-Methods)
 
+* [Lesson 15: Hadoop](https://github.com/jhaski/GA-DAT-08/wiki/Lesson-15:-Hadoop-and-Impala-Exercises)
+  [Setting Up Hadoop](https://github.com/jhaski/GA-DAT-08/wiki/Lesson-15:-Setting-up-AWS)
 
+* [Lesson 16: Spark](https://github.com/jhaski/GA-DAT-08/wiki/Lesson-16:-Spark)
